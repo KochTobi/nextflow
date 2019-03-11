@@ -153,12 +153,11 @@ class CondaCache {
         if( isYamlFilePath(condaEnv) ) {
             try {
                 final path = condaEnv as Path
+								name = path.baseName
                 content = path.text
                 final yaml = (Map)new Yaml().load(content)
                 if( yaml.name )
                     name = yaml.name
-                else
-                    name = path.baseName
             }
             catch( NoSuchFileException e ) {
                 throw new IllegalArgumentException("Conda environment file does not exist: $condaEnv")
@@ -170,8 +169,8 @@ class CondaCache {
         else if( isTextFilePath(condaEnv) )  {
             try {
                 final path = condaEnv as Path
+								name = path.baseName
                 content = path.text
-                name = path.baseName
             }
             catch( NoSuchFileException e ) {
                 throw new IllegalArgumentException("Conda environment file does not exist: $condaEnv")
